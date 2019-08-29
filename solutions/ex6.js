@@ -25,7 +25,7 @@ const addChildToViz = () => {
   viz.appendChild(newChild);
 };
 
-viz.addEventListener("click", addChildToViz);
+// viz.addEventListener("click", addChildToViz);
 
 // Task
 // Where can you see the results of the console.log below? How is it different from in previous exercises?
@@ -35,11 +35,13 @@ function drawIrisData() {
     .fetch("./iris_json.json")
     .then(data => data.json())
     .then(data => {
-      console.log(data);
+      data.forEach(e => {
+        addChildToViz(e.petallength);
+      });
     });
 }
 
-drawIrisData();
+viz.addEventListener("click", drawIrisData);
 
 // Task
 // Modify the code above to visualize the Iris dataset in the preview of index.html.

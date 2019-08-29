@@ -1,18 +1,18 @@
 /*
   Exercise 4
-  Retrieving a dataset from the web
+  Loading a dataset from a file
 */
+
+const fs = require("fs");
 
 // Task
 // Explore the dataset that is console logged:
 // How many entries are in the dataset? What data structure is returned? What properties are available? What data types do you see?
 function getIrisData() {
-  fetch(
-    "https://pkgstore.datahub.io/machine-learning/iris/iris_json/data/23a7b3de91da915b506f7ca23f6d1141/iris_json.json"
-  )
-    .then(data => data.json())
-    .then(data => {
-      console.log(data);
-      console.table(data);
-    });
+  fs.readFile("./iris_json.json", "utf8", (err, data) => {
+    if (err) console.log(err);
+    console.log(data);
+  });
 }
+
+getIrisData();
