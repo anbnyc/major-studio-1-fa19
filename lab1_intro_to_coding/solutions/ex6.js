@@ -15,6 +15,7 @@
 // Task
 // What does the following code do?
 const viz = document.body.querySelector(".viz");
+const button = document.body.querySelector("#button");
 
 console.log(viz, viz.children);
 
@@ -25,7 +26,7 @@ const addChildToViz = () => {
   viz.appendChild(newChild);
 };
 
-// viz.addEventListener("click", addChildToViz);
+// button.addEventListener("click", addChildToViz);
 
 // Task
 // Where can you see the results of the console.log below? How is it different from in previous exercises?
