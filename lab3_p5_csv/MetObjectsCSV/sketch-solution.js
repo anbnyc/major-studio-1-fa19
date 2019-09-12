@@ -1,10 +1,7 @@
-// this variable will contain the csv table
 let table;
 
-// this array will be our working array  containing every year and count
 let allYears = [];
 
-// variables for the min and max values of this data set
 let minObjects, maxObjects, minYear, maxYear;
 
 function preload() {
@@ -18,17 +15,16 @@ function setup() {
   // width and height of the browser window
   createCanvas(windowWidth, windowHeight);
   analyzeData();
-  // displayData();
+  displayData();
 }
 
 function analyzeData(){
   // Let's get the number of objects within the years from 1970 - 2017
-  for(var i=1970; i< /* COMPLETE ME */; i++){
-    // creating a new object for each year that contains year and count
+  for(var i=1970; i<2018; i++){
     let yearNow = {};
     yearNow.year = i;
     yearNow.count = table.findRows(String(i),3).length;
-    append(allYears, /* COMPLETE ME */);
+    append(allYears, yearNow);
   }
 
   // Let's find out which year has the most items and which one has the least
@@ -44,12 +40,12 @@ function analyzeData(){
       maxYear = i;
     }
     if(allYears[i].count < minObjects){
-      minObjects = /* COMPLETE ME */;
-      minYear = /* COMPLETE ME */;
+      minObjects = allYears[i].count;
+      minYear = i;
     }
   }
   console.log("The Year " + allYears[maxYear].year + " has the most objects with " + allYears[maxYear].count + " items.");
-  console.log("The Year " + /* COMPLETE ME */ + " has the least objects with " + /* COMPLETE ME */ + " items.");
+  console.log("The Year " + allYears[minYear].year + " has the least objects with " + allYears[minYear].count + " items.");
   console.log(allYears);
 }
 
@@ -59,7 +55,7 @@ function displayData(){
   fill(255,0,0);
   for(var i=0; i<allYears.length; i++){
     let h = map(allYears[i].count,0,maxObjects,0, height);
-    let x = map(/* COMPLETE ME */);
-    rect(x,height-h,20, /* COMPLETE ME */);
+    let x = map(i,0,allYears.length, 0, width);
+    rect(x,height-h,20, h);
   }
 }
