@@ -13,7 +13,7 @@ function setup() {
     lexicon = new RiLexicon();
 
     // create an html input field
-    input = createInput("Hello world");
+    input = createInput("It was a long and winding road");
     button = createButton("Submit");
     button.mousePressed(processRita);
     input.changed(processRita);
