@@ -5,12 +5,10 @@ https://www.youtube.com/watch?v=lIPEvh8HbGQ
 
 let input;
 let button;
-let lexicon;
 
 function setup() {
     // we are using p5.dom, so no canvas, just html
     noCanvas();
-    lexicon = new RiLexicon();
 
     // create an html input field
     input = createInput("It was a long and winding road");
@@ -34,7 +32,7 @@ function processRita() {
 
     for (var i = 0; i < words.length; i++) {
         if (pos[i] === 'nn' || pos[i] === 'nns' ){
-          output += lexicon.randomWord('nn');
+          output += RiTa.randomWord('nn');
         }else{
           output += words[i];
         }
