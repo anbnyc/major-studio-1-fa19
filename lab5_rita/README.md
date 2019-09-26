@@ -14,6 +14,6 @@ https://www.youtube.com/watch?v=lIPEvh8HbGQ
 
 
 Further reading
-Another Natural language processing library:
+Another Natural language processing library:  
 http://compromise.cool/  
 https://youtu.be/tk_JGu2AbJY
