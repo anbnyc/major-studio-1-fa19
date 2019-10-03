@@ -1,15 +1,11 @@
 ### Major Studio 1 - Lab 6: Working with images
 
 #### Topics
-- Downloading images from the API
-- Cross-origin issues
-- Images in HTML, p5, D3
-- Reading pixels in P5
+- Downloading images from the API and preparing your json file
+- Displaying images and data from json in P5
 - Using Vibrant.js
-- Building a loader?
 
 #### Further Reading
-- Spritesheets, low res loading, lazy loading
-- OpenCV
-- ImageMagick
-- Machine learning, Runway
+- Spritesheets: https://css-tricks.com/css-sprites/  
+- OpenCV: https://opencv.org/  
+- ImageMagick: https://imagemagick.org/index.php  
