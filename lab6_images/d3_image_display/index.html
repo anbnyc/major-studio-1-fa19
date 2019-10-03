@@ -11,36 +11,48 @@
       }
       body{
         overflow:  auto;
-        font-family: sans-serif;
-        background:#eee;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background:#e0e0e0;
+        padding:2rem;
+        color:#222;
+        letter-spacing:-0.5pt;
       }
-      #app div.met-image{
-        padding: 1rem; margin:2rem;
+      #app{
+        margin-top:2rem;
+        display:grid;
+        grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 2rem;
+      }
+      
+      div.met-card{
         max-width: 400px;
         display: inline-block;
 
         vertical-align:top;
         white-space:normal;
-        
-        background:#fff;
-        box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
-        border-radius: 20px;
       }
-      #app div.met-image h1{
-        font-size:1.5rem;
+      div.met-card h2{
+        font-size:1.2rem;
         line-height:1.1;
+        padding-bottom:0.5em;
       }
-      #app div.met-image div.img-card{
+      div.met-card div.image{
         margin-bottom:1rem;
+        width:200px;height:200px;
+        display:flex;
+        align-items: flex-end;
       }
-      #app div.met-image div.img-card img{
+      div.met-card div.image img{
         max-width:100%;height:auto;
-        max-height:100%;
+        max-height:200px;
       }
+      .object-date{ color:#999; }
     </style>
   </head>
   <body>
 
+    <h1>An Image Collection</h1>
+    
     <!-- where our images go -->
     <div id="app"></div>
 
