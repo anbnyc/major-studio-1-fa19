@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Major Studio 1 - Lab 6 - d3 Image Display</title>
+
+    <style type="text/css">
+      *{
+        margin:0;padding:0;
+        box-sizing: border-box;
+      }
+      body{
+        overflow:  auto;
+        font-family: sans-serif;
+        background:#eee;
+      }
+      #app div.met-image{
+        padding: 1rem; margin:2rem;
+        max-width: 400px;
+        display: inline-block;
+
+        vertical-align:top;
+        white-space:normal;
+        
+        background:#fff;
+        box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+        border-radius: 20px;
+      }
+      #app div.met-image h1{
+        font-size:1.5rem;
+        line-height:1.1;
+      }
+      #app div.met-image div.img-card{
+        margin-bottom:1rem;
+      }
+      #app div.met-image div.img-card img{
+        max-width:100%;height:auto;
+        max-height:100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- where our images go -->
+    <div id="app"></div>
+
+  </body>
+  <script src="./libraries/d3.v5.min.js"></script>
+  <script src="app.js"></script>
+</html>
