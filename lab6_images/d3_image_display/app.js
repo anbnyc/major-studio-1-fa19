@@ -1,8 +1,6 @@
-(async () => {
-
-let data = await fetch('./data.json').then( res => res.json() ); 
+(async ()=>{
+let data = await d3.json('data.json'); 
 let app  = d3.select('#app');
-
 let card = app.selectAll('div.met-image')
               .data(data)
               .join('div')
@@ -16,5 +14,4 @@ card.append('div')
 
 card.append('h1')
     .text((d)=>{ return d.title});
-
 })();
