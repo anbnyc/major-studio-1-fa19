@@ -1,0 +1,13 @@
+{
+  "name": "01_npm-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start" : "node main.js",
+    "args": "node args.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

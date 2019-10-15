@@ -1,0 +1,1 @@
+console.log("SCHOOL is set to", process.env.SCHOOL);
