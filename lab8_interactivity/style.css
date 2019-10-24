@@ -1,0 +1,30 @@
+.interactive {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.interactive svg {
+  grid-column: 2 / 3;
+  grid-row: 1;
+}
+
+.interactive .left-menu {
+  grid-column: 1 / 2;
+  grid-row: 1;
+}
+
+.interactive .right-menu {
+  grid-column: 3 / 4;
+  grid-row: 1;
+}
+
+.interactive .tooltip.visible {
+  visibility: visible;
+}
+
+.interactive .tooltip:not(.visible) {
+  visibility: hidden;
+}
