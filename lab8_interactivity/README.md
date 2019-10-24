@@ -2,6 +2,10 @@
 
 This lab demonstrates filter, select, and hover behavior with a simple D3 visualization. This also shows how to use a `state` variable to keep track of your data.
 
+### App Architecture + State Schema
+
+![aass](./architecture.jpg)
+
 ### Activity
 
 - 10 minutes: read through the code. Try to focus on the order in which code is _executed_, not necessarily the order in which it is written.
