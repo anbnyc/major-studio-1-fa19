@@ -16,10 +16,7 @@ This lab demonstrates filter, select, and hover behavior with a simple D3 visual
 
 ### To-Do List
 
-[ ] Use destructuring to get variables off state
-
-[ ] Add transitions on enter/exit
-
-[ ] Add a window.resize event listener
-
-[ ] Add CSS to style tooltip and menus
+- [ ] Use destructuring to get variables off state
+- [ ] Add transitions on enter/exit
+- [ ] Add a window.resize event listener
+- [ ] Add CSS to style tooltip and menus
