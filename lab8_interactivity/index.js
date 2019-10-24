@@ -7,7 +7,7 @@ const CONSTANTS = {
   PETAL_WIDTH: "petalwidth",
   SEPAL_LENGTH: "sepallength",
   SEPAL_WIDTH: "sepalwidth",
-  TOOLTIP_WIDTH: 100,
+  TOOLTIP_WIDTH: 150,
   TOOLTIP_HEIGHT: 20,
 };
 
@@ -44,12 +44,12 @@ let state = {
 let xScale, yScale, colorScale;
 
 async function dataLoad() {
-  // this function contains anything that does not depend on the data
+  // we can set up our layout before we have data
   initializeLayout();
   const data = await d3.json("./iris_json.json");
 
-  // once data is on state, we can access it from any other function
-  // because state is a global variable
+  // once data is on state, we can access it from any other function because state is a global variable
+  // we also populate our checkboxes with values from the data
   const checkboxValues = Array.from(new Set(data.map(d => d[CLASS])));
   setState({
     data: data.map((d, i) => ({
@@ -63,13 +63,16 @@ async function dataLoad() {
   });
 }
 
+// whenever state changes, update the state variable, then redraw the viz
 function setState(nextState) {
   console.log("state updated");
+  // using Object.assign keeps the state *immutable*
   state = Object.assign({}, state, nextState);
   draw();
 }
 
 function onCheckboxChange(d) {
+  // first, was the clicked box already checked or not?
   const index = state.filters.checked.indexOf(d);
   const isBoxChecked = index > -1;
   let nextCheckedValues;
@@ -79,6 +82,7 @@ function onCheckboxChange(d) {
       ...state.filters.checked.slice(0, index),
       ...state.filters.checked.slice(index + 1),
     ];
+    // otherwise, add it to the checked values
   } else {
     nextCheckedValues = [...state.filters.checked, d];
   }
@@ -104,7 +108,7 @@ function onMouseEvent(d) {
   if (d3.event.type === "mouseenter") {
     setState({
       tooltip: {
-        value: d.id,
+        value: d,
         visible: true,
         coordinates: [
           +d3.select(d3.event.target).attr("width") + TOOLTIP_WIDTH / 2 + 10,
@@ -123,10 +127,11 @@ function onMouseEvent(d) {
   }
 }
 
+// this function sets up everything we can before data loads
 function initializeLayout() {
-  const svgWidth = 0.5 * state.dimensions[0];
+  const svgWidth = 0.6 * state.dimensions[0];
   const svgHeight = state.dimensions[1];
-  const margin = 50;
+  const margin = 80;
 
   const parent = d3.select(".interactive");
   const svg = parent
@@ -161,7 +166,7 @@ function initializeLayout() {
     .append("rect")
     .attr("height", TOOLTIP_HEIGHT)
     .attr("width", TOOLTIP_WIDTH)
-    .attr("fill", "#888");
+    .attr("fill", "#aeaeae");
   tooltip
     .append("text")
     .attr("x", 5)
@@ -170,11 +175,16 @@ function initializeLayout() {
 
   // add left menu
   const leftMenu = parent.append("div").attr("class", "left-menu");
+  leftMenu.append("div").attr("class", "title").html(`
+      <h1>Fisher's Iris Dataset</h1>
+      <h4>Which properties of a flower best distinguish it from other species?</h4>
+    `);
+  leftMenu.append("div").attr("class", "filters");
 
   // add right menu
-  const rightMenu = parent
+  const rightMenu = parent.append("div").attr("class", "right-menu");
+  rightMenu
     .append("form")
-    .attr("class", "right-menu")
     .html(
       state.sizeBy.menu
         .map(
@@ -186,23 +196,31 @@ function initializeLayout() {
         .join("")
     )
     .on("change", onRadioChange);
+  rightMenu.append("div").attr("class", "legend");
 }
 
+// everything in this function depends on data, so the function is called after data loads and whenever state changes
 function draw() {
+  // filter data based on state.filters
   const filteredData = state.data
     .filter(d => state.filters.checked.indexOf(d[CLASS]) > -1)
     .sort((a, b) =>
       d3.descending(a[state.sizeBy.selected], b[state.sizeBy.selected])
     );
+
+  // update our scales based on filteredData
   xScale.domain([0, d3.max(filteredData, d => d[state.sizeBy.selected])]);
   yScale.domain(filteredData.map(d => d.id));
   colorScale.domain(state.filters.menu);
   const barHeight = yScale.bandwidth();
 
+  // update our axes based on the updated scales
   d3.select(".x-axis").call(d3.axisBottom(xScale));
   d3.select(".y-axis").call(d3.axisLeft(yScale).tickValues([]));
+
+  // update checkbox values based on state.filters
   const checkRow = d3
-    .select(".left-menu")
+    .select(".filters")
     .selectAll(".check-row")
     .data(state.filters.menu)
     .join("div")
@@ -217,18 +235,22 @@ function draw() {
     );
   checkRow.select("input").on("change", onCheckboxChange);
 
+  // update bars based on filteredData
+  const barX = xScale.range()[0];
   d3.select(".bars")
     .selectAll("rect")
     .data(filteredData)
     .join("rect")
-    .attr("x", xScale.range()[0])
-    .attr("width", d => xScale(d[state.sizeBy.selected]))
+    .attr("x", barX)
+    .attr("width", d => xScale(d[state.sizeBy.selected]) - barX)
     .attr("height", barHeight)
     .attr("y", d => yScale(d.id))
     .attr("fill", (d, i) => colorScale(d[CLASS]))
     .on("mouseenter", onMouseEvent)
-    .on("mouseleave", onMouseEvent);
+    .on("mouseleave", onMouseEvent)
+    .classed("highlight", d => d.id === state.tooltip.value.id);
 
+  // update tooltip based on state.tooltip
   const tooltip = d3.select(".tooltip");
   tooltip
     .attr(
@@ -238,7 +260,24 @@ function draw() {
       })`
     )
     .classed("visible", state.tooltip.visible);
-  tooltip.select("text").text(state.tooltip.value);
+  tooltip.select("text").text(() => {
+    const d = state.tooltip.value;
+    return `${d.id}: ${d[state.sizeBy.selected]}`;
+  });
+
+  // update legend based on filteredData
+  const legend = d3.select(".legend");
+  legend
+    .selectAll(".legend-row")
+    .data(state.filters.checked)
+    .join("div")
+    .attr("class", "legend-row")
+    .html(
+      d => `
+      <div class="box" style="background-color:${colorScale(d)};"></div>
+      <div class="legend-label">${d}</div>
+    `
+    );
 }
 
 // this function is only called once

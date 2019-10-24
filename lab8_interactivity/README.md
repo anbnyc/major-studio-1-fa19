@@ -1,16 +1,18 @@
-## How can we improve this?
+## Lab 8: Interactivity
 
-#### Code refactors
+This lab demonstrates filter, select, and hover behavior with a simple D3 visualization. This also shows how to use a `state` variable to keep track of your data.
 
-- Use destructuring to get variables off state
+### Activity
 
-#### Aesthetic changes
+- 10 minutes: read through the code. Try to focus on the order in which code is _executed_, not necessarily the order in which it is written.
 
-- Add CSS to make it look nicer
-- Add transitions on enter/exit
-- Add a color legend
+- 15 minutes: discussion and questions about the code
 
-#### New features
+- 15 minutes: add new features together
 
-- Add a window.resize event listener
-- Tooltip knows what
+### To-Do List
+
+[ ] Use destructuring to get variables off state
+[ ] Add transitions on enter/exit
+[ ] Add a window.resize event listener
+[ ] Add CSS to style tooltip and menus
