@@ -23,6 +23,6 @@ This lab demonstrates filter, select, and hover behavior with a simple D3 visual
 
 ### JS Resources
 
-- Memoization: https://codeburst.io/understanding-memoization-in-3-minutes-2e58daf33a19?gi=b244a9ff3b1b
+- Memoization: https://codeburst.io/understanding-memoization-in-3-minutes-2e58daf33a19
 
 - Immutability: https://www.sitepoint.com/immutability-javascript/
