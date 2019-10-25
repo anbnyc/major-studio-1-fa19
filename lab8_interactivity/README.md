@@ -20,3 +20,9 @@ This lab demonstrates filter, select, and hover behavior with a simple D3 visual
 - [ ] Add transitions on enter/exit
 - [ ] Add a window.resize event listener
 - [ ] Add CSS to style tooltip and menus
+
+### JS Resources
+
+- Memoization: https://codeburst.io/understanding-memoization-in-3-minutes-2e58daf33a19?gi=b244a9ff3b1b
+
+- Immutability: https://www.sitepoint.com/immutability-javascript/
