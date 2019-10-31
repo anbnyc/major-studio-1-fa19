@@ -16,6 +16,12 @@ Wireframes
 - Transform and Transform each, random
 - Symbols  
 
+### Figma
+- www.figma.com
+- https://www.youtube.com/figmadesign
+- Frames, Styles, Grids, Preview
+
+
 
 
 ### Activity
