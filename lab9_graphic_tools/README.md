@@ -37,7 +37,7 @@ In groups of 2-3, analyze one of the below visualizations. Ask the following que
 - How many colors are used, and what for?
 - Think through how you would design the visualization in a graphic tool like Figma or Illustrator.
 
-
+### Examples/Groups:
 - http://subspotting.nyc/main/index.html
 - https://population.io/
 - http://o-c-r.org/adcells/
@@ -46,3 +46,5 @@ In groups of 2-3, analyze one of the below visualizations. Ask the following que
 - http://china.fathom.info/
 - https://archive.nytimes.com/www.nytimes.com/interactive/2012/10/15/us/politics/swing-history.html?_r=0
 - https://uclab.fh-potsdam.de/ff/
+- https://eljunquito.forensic-architecture.org/
+- http://rhythm-of-food.net/
