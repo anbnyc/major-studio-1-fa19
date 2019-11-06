@@ -1,11 +1,16 @@
-let met_data;
+let met_data; // data from JSON
 let fishies = []; // Global array to hold all fish objects
+
+// mapping departments to colors
 let colors = {"American Decorative Arts": "#e6194b", "Ancient Near Eastern Art": "#3cb44b", "Arms and Armor": "#ffe119", "Arts of Africa, Oceania, and the Americas": "#4363d8", "Asian Art": "#f58231", "Drawings and Prints": "#f032e6", "Egyptian Art": "#bcf60c", "European Paintings": "#fabebe", "European Sculpture and Decorative Arts": "#008080", "Greek and Roman Art": "#e6beff", "Islamic Art": "#9a6324", "Medieval Art": "#aaffc3", "Modern Art": "#000075", "Musical Instruments": "#808000",
 "Photographs": "#ffd8b1", "The Cloisters": "#911eb4", "The Costume Institute": "#46f0f0","Costume Institute": "#46f0f0", "The Libraries": "#800000", "Robert Lehman Collection": "#fffac8",
 "The Libraries": "#263238","Medieval Art": "#ffe0b2", "Modern Art":"#c5e1a5", "Modern and Contemporary Art":"#c5e1a5", "The American Wing":"#ff1744"};
 const base_url = 'https://www.metmuseum.org/art/collection/search/';
 
 function preload() {
+  // loading the Met Data
+  // which was based on this query:
+  // https://collectionapi.metmuseum.org/public/collection/v1/search?q=fish
   met_data = loadJSON("data/data.json");
 }
 function setup() {
@@ -14,51 +19,56 @@ function setup() {
 }
 
 
-
 function createFish(){
+  // loop through whole collection
+
   met_data.forEach(e => {
     if(e.isPublicDomain==true){
+
+    // all parameters we'll pass onto the fish objects
     let x = random(20, width-20);
     let y = random(20, height-20);
+    // color is based on dept
     let color = colors[e.department];
-    // let opacity =  random(0,255);
-    let opacity = map(e.objectBeginDate,-3000,2019, 0,100);
+
+    // speed, diameter and opacity is based on time
     let diameter = map(e.objectBeginDate,-3000,2019, 2,16);
     let speed = map(e.objectBeginDate,-3000,2019, 0.01,0.6);
+
+    // opacity is random just for effect
+    let opacity = random(0,100);
+
+    // need this for rollover
     let label = e.title;
     let objectID = e.objectID;
     let isHighlight = e.isHighlight;
 
+    // pass all this information to object and add to array
     fishies.push(new Fish(x, y, diameter, speed, color,opacity, label, objectID, isHighlight));
     }
   });
 }
 function draw() {
+  // reset background and cursor
   background("#01132c");
+  cursor(ARROW);
 
-  // Display all circles
+  // Loop through all fish
   for (let i = 0; i < fishies.length; i++) {
-    // for (let i = 0; i < 10; i++) {
     fishies[i].update();
     fishies[i].display();
     fishies[i].rollover(mouseX, mouseY);
   }
-
-  // Label directions at bottom
-  textAlign(LEFT);
-  fill(0);
-  text('Click to add bubbles.', 10, height - 10);
 }
 
 function mouseReleased() {
-  console.log("released")
   for(let i=0 ; i<fishies.length; i++){
     fishies[i].openLink();
   }
 }
 
 
-// Bubble class
+// Fish class
 class Fish {
   constructor(x, y, diameter,speed, col, opacity, name, objectID, isHighlight) {
     this.x = x;
@@ -67,13 +77,11 @@ class Fish {
     this.radius = diameter / 2;
     this.name = name;
     this.color = color(convertHex(col, opacity));
-    this.opacity = opacity;
     this.objectID = objectID;
     this.isHighlight = isHighlight;
     this.speedX = random(-1,1) *speed;
     this.speedY = random(-1,1) *speed;
     this.over = false;
-
   }
 
   // Check if mouse is over the circle
@@ -89,6 +97,7 @@ class Fish {
     }
 
   }
+  // this updates x and y depending on speed and bounces at corners
   update(){
     this.x +=this.speedX;
     this.y +=this.speedY;
@@ -103,28 +112,31 @@ class Fish {
     }
 
   }
-  // Display the Circle
+
+  // Display the fish
   display() {
     noStroke(0);
-    // strokeWeight(0.8);
-    // noFill();
     fill(this.color);
     ellipse(this.x, this.y, this.diameter, this.diameter);
+
+    // if rollover show title
     if (this.over) {
       fill(255);
       textAlign(CENTER);
       text(this.name, this.x, this.y + this.radius + 20);
+      cursor(HAND);
     }
+    // if is Highlight add ring
     if (this.isHighlight) {
       stroke(255);
       strokeWeight(0.8);
       noFill();
       ellipse(this.x, this.y, this.diameter*3, this.diameter*3);
-
     }
   }
 }
 
+// utility function
 function convertHex(hex,opacity){
     hex = hex.replace('#','');
     r = parseInt(hex.substring(0,2), 16);
