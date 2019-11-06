@@ -86,5 +86,6 @@ function addObject(objectData) {
       image: objectData.primaryImage
     })
      */
-  console.log("object at index", index, myArray[index]);
+  // console.log("object at index", index, myArray[index]);
+  console.log(myArray);
 }
