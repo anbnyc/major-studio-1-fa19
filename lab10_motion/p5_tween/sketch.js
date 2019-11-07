@@ -1,4 +1,3 @@
-// const position = { x : random(width), y: random(height) };
 let position, target, tween;
 
 function setup() {
