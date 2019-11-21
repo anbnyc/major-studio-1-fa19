@@ -1,7 +1,6 @@
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <!-- Latest compiled and minified CSS -->
     <style>
         div {
             background-color: pink;
@@ -11,29 +10,19 @@
             background-color: lavender;
         }
     </style>
-    <script src="https://d3js.org/d3.v4.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-2 col-sm-12">.col-lg-4 .col-md-2 .col-sm-8
-                <svg width="100%" height="50"></svg>
-            </div>
-            <div class="col-lg-4 col-md-2 col-sm-12">.col-lg-4 .col-md-10 .col-sm-4</div>
-            <!--<svg class="col-lg-4 hidden-md col-sm-4" height="50"></svg>-->
-            <script>
-                var row = d3.select(".row");
-                row.append('svg')
-                .attr('class', 'col-lg-4 col-md-2 col-sm-12');
-            </script>
-        </div>
-    </div>
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-9 col-lg-6">col-xs-12 col-sm-6 col-md-9 col-lg-6</div>
+  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-6">col-xs-6 col-sm-6 col-md-3 col-lg-6</div>
+</div>
+<div class="row">
+  <div class="col-xs-6 col-sm-4 col-md-4">col-xs-6 col-sm-4 col-md-4</div>
+  <div class="col-xs-6 col-sm-4 col-md-4">col-xs-6 col-sm-4 col-md-4</div>
+  <div class="col-xs-6 col-sm-4 col-md-4">col-xs-6 col-sm-4 col-md-4</div>
 
-    <script>
-        // var body = d3.select("body");
-        // var svg = body.select("svg");
-        // alert(svg.style("width"));
-    </script>
+</div>    </div>
 </body>
 </html>
